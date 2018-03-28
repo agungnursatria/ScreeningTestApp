@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:padding="32dp"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/colorPrimary"
     tools:context="com.anb.screeningtestapp.SelectingActivity">
 
     <LinearLayout
@@ -22,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Nama"
+            android:textColor="@android:color/white"
             style="@style/Base.TextAppearance.AppCompat.Medium"/>
 
         <TextView
@@ -29,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text=": "
+            android:textColor="@android:color/white"
             style="@style/Base.TextAppearance.AppCompat.Medium"/>
 
         <TextView
@@ -37,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2.8"
             android:text="Nama anda"
+            android:textColor="@android:color/white"
             style="@style/Base.TextAppearance.AppCompat.Medium"/>
 
     </LinearLayout>
@@ -47,6 +51,8 @@
         android:layout_height="wrap_content"
         android:text="Pilih event"
         android:textAlignment="center"
+        android:background="@drawable/button_file"
+        android:layout_marginBottom="16dp"
         style="@style/Base.TextAppearance.AppCompat.Medium"/>
 
     <Button
@@ -55,6 +61,7 @@
         android:layout_height="wrap_content"
         android:text="Pilih guest"
         android:textAlignment="center"
+        android:background="@drawable/button_file"
         style="@style/Base.TextAppearance.AppCompat.Medium"/>
 
 </LinearLayout>

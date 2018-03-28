@@ -4,26 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:padding="32dp"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context="com.anb.screeningtestapp.HomeActivity">
 
-
-    <EditText
-        android:id="@+id/edtNama"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:hint="masukkan nama..."
-        style="@style/Base.TextAppearance.AppCompat.Medium"/>
+        android:textColorHint="@android:color/white">
+
+        <EditText
+            android:id="@+id/edtNama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="Nama"
+            android:layout_marginBottom="32dp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            style="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
 
     <Button
         android:id="@+id/btnNext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Next"
+        android:padding="12dp"
         android:textAlignment="center"
+        android:background="@drawable/button_file"
         style="@style/Base.TextAppearance.AppCompat.Medium"/>
 
 

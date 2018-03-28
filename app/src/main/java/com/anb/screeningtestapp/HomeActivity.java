@@ -20,9 +20,11 @@ public class HomeActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this,SelectingActivity.class);
-                intent.putExtra("nama", edtNama.getText().toString());
-                startActivity(intent);
+                if (!edtNama.getText().toString().equals("")){
+                    Intent intent = new Intent(HomeActivity.this,SelectingActivity.class);
+                    intent.putExtra("nama", edtNama.getText().toString());
+                    startActivity(intent);
+                }
             }
         });
     }
