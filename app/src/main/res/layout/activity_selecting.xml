@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.anb.screeningtestapp.SelectingActivity">
+
+    <LinearLayout
+        android:id="@+id/layoutNama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="5"
+        android:orientation="horizontal"
+        android:layout_marginBottom="32dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Nama"
+            style="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text=": "
+            style="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+        <TextView
+            android:id="@+id/txtNama"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.8"
+            android:text="Nama anda"
+            style="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnPilihEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pilih event"
+        android:textAlignment="center"
+        style="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+    <Button
+        android:id="@+id/btnPilihGuest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pilih guest"
+        android:textAlignment="center"
+        style="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+</LinearLayout>
