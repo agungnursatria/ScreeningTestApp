@@ -2,6 +2,7 @@ package com.anb.screeningtestapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -41,6 +42,12 @@ public class GuestActivity extends AppCompatActivity {
         gridView = findViewById(R.id.guest_list);
 
         requestJSONwithRetrofit();
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            gridView.setNumColumns(2);
+        } else {
+            gridView.setNumColumns(3);
+        }
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

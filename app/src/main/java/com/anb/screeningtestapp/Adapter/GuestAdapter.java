@@ -49,13 +49,11 @@ public class GuestAdapter extends BaseAdapter{
 
         TextView txtGuestName = v.findViewById(R.id.txtGuestName);
         TextView txtGuestBirthday = v.findViewById(R.id.txtGuestBirthday);
-        ImageView imageView = v.findViewById(R.id.imageGuest);
 
         Guest guest = guestList.get(position);
 
         txtGuestName.setText(guest.name);
         txtGuestBirthday.setText(guest.birthday);
-        imageView.setImageResource(guest.image);
 
         return v;
     }
