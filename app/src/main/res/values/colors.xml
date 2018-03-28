@@ -6,4 +6,5 @@
 
     <color name="buttonPressed">#F44336</color>
     <color name="buttonNotPressed">#fff</color>
+    <color name="black">#000</color>
 </resources>
