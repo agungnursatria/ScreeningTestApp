@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,7 +30,9 @@ public class GuestActivity extends AppCompatActivity {
 
     private static final String TAG = "GuestActivity";
     public static final String BASE_URL = "http://dry-sierra-6832.herokuapp.com";
+    SwipeRefreshLayout swipe;
     ArrayList<Guest> guestlist = new ArrayList<>();
+    GuestAdapter guestAdapter;
     GridView gridView;
 
     @Override
@@ -40,8 +43,22 @@ public class GuestActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         gridView = findViewById(R.id.guest_list);
+        swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
+        // Mengambil data dari json dan dipasang ke gridlayout
+        swipe.setRefreshing(true);
         requestJSONwithRetrofit();
+
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipe.setRefreshing(true);
+                guestAdapter.guestList.clear();
+                guestAdapter.notifyDataSetChanged();
+                requestJSONwithRetrofit();
+            }
+        });
+
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             gridView.setNumColumns(2);
@@ -55,16 +72,16 @@ public class GuestActivity extends AppCompatActivity {
                 Intent returnIntent = new Intent();
                 TextView txtBirthday = view.findViewById(R.id.txtGuestBirthday);
                 TextView txtName = view.findViewById(R.id.txtGuestName);
-                returnIntent.putExtra("namaguest",txtName.getText().toString());
-                returnIntent.putExtra("birthdayguest",txtBirthday.getText().toString());
-                setResult(Activity.RESULT_OK,returnIntent);
+                returnIntent.putExtra("namaguest", txtName.getText().toString());
+                returnIntent.putExtra("birthdayguest", txtBirthday.getText().toString());
+                setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }
         });
 
     }
 
-    private void requestJSONwithRetrofit(){
+    private void requestJSONwithRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -76,7 +93,7 @@ public class GuestActivity extends AppCompatActivity {
         call.enqueue(new Callback<ArrayList<Guest>>() {
             @Override
             public void onResponse(Call<ArrayList<Guest>> call, Response<ArrayList<Guest>> response) {
-                for (int i = 0; i < response.body().size(); i++){
+                for (int i = 0; i < response.body().size(); i++) {
                     Guest guest = new Guest();
                     guest.id = response.body().get(i).id;
                     guest.name = response.body().get(i).name;
@@ -85,25 +102,27 @@ public class GuestActivity extends AppCompatActivity {
 
                 }
                 initImage();
-                GuestAdapter guestAdapter = new GuestAdapter(GuestActivity.this,guestlist);
+                guestAdapter = new GuestAdapter(GuestActivity.this, guestlist);
                 gridView.setAdapter(guestAdapter);
             }
 
             @Override
             public void onFailure(Call<ArrayList<Guest>> call, Throwable t) {
-                Log.e(TAG, "onFailure: Something went wrong: " + t.getMessage() );
+                Log.e(TAG, "onFailure: Something went wrong: " + t.getMessage());
                 Toast.makeText(GuestActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
+        swipe.setRefreshing(false);
     }
-    private void initImage(){
+
+    private void initImage() {
         int[] img = {R.drawable.foto1,
                 R.drawable.foto2,
                 R.drawable.foto3,
                 R.drawable.foto4,
                 R.drawable.foto5,};
-        for (Guest guest: guestlist) {
-            guest.image = img[ guestlist.indexOf(guest)%5 ];
+        for (Guest guest : guestlist) {
+            guest.image = img[guestlist.indexOf(guest) % 5];
         }
     }
 }

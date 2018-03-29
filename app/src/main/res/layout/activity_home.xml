@@ -1,47 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/bg_validation"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="32dp"
     tools:context="com.anb.screeningtestapp.HomeActivity">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_password"
+    <TextView
+        android:id="@+id/txtSelamatDatang"
+        style="@style/Base.TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="sans-serif"
+        android:text="Selamat Datang!"
+        android:textColor="@android:color/white"
+        android:textStyle="bold|normal" />
+
+    <TextView
+        android:id="@+id/txtCaption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@android:color/white">
-
-        <EditText
-            android:id="@+id/edtNama"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:hint="Nama"
-            android:layout_marginBottom="32dp"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@android:color/white"
-            style="@style/Base.TextAppearance.AppCompat.Medium"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-
-
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Next"
-        android:padding="12dp"
+        android:layout_below="@id/txtSelamatDatang"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="sans-serif"
+        android:text="Sertakan gambar profil Anda untuk melengkapi profil ini."
         android:textAlignment="center"
-        android:background="@drawable/button_file"
-        style="@style/Base.TextAppearance.AppCompat.Medium"/>
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
+    <ImageView
+        android:id="@+id/imgProfilePic"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="48dp"
+        android:src="@drawable/btn_add_photo"
+        android:textColor="@android:color/white" />
 
-</LinearLayout>
+    <EditText
+        android:id="@+id/edtNama"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgProfilePic"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@android:color/white"
+        android:hint="Sarah Vidrayani"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white" />
+
+    <FrameLayout
+        android:id="@+id/btnSelesai"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:clickable="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/rectangle" />
+
+        <TextView
+            style="@style/Base.TextAppearance.AppCompat.Display1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Selesai"
+            android:textColor="@android:color/white"
+            android:textSize="18dp" />
+
+    </FrameLayout>
+
+</RelativeLayout>

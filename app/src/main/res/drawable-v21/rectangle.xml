@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/buttonRectanglePressed">
+
+
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="3dp" android:color="#fff" />
+            <padding android:left="2dp"
+                android:top="2dp"
+                android:right="2dp"
+                android:bottom="2dp" />
+            <corners android:radius="5dp" />
+            <solid android:color="@color/buttonRectangleNotPressed"/>
+        </shape>
+    </item>
+
+
+</ripple>

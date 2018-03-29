@@ -17,10 +17,10 @@ import java.util.ArrayList;
  * Created by Agung Nursatria on 3/28/2018.
  */
 
-public class GuestAdapter extends BaseAdapter{
+public class GuestAdapter extends BaseAdapter {
 
-    private Context context;
-    private ArrayList<Guest> guestList;
+    public Context context;
+    public ArrayList<Guest> guestList;
 
     public GuestAdapter(Context context, ArrayList<Guest> guestList) {
         this.context = context;
@@ -45,7 +45,7 @@ public class GuestAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.guest_item,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.guest_item, parent, false);
 
         TextView txtGuestName = v.findViewById(R.id.txtGuestName);
         TextView txtGuestBirthday = v.findViewById(R.id.txtGuestBirthday);

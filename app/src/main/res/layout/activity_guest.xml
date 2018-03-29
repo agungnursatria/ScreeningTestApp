@@ -15,39 +15,38 @@
             android:id="@+id/toolbar_guest"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@android:color/holo_blue_dark"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <TextView
                 android:id="@+id/toolbar_title_guest"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Guest"
-                android:textColor="@android:color/white"
-                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:layout_gravity="center"
-                />
+                android:text="Guest"
+                android:textColor="#FFF" />
 
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <GridView
             android:id="@+id/guest_list"
-            android:numColumns="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:horizontalSpacing="16dp">
+            android:horizontalSpacing="16dp"
+            android:numColumns="2">
 
         </GridView>
 
-    </RelativeLayout>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

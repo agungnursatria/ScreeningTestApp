@@ -17,7 +17,7 @@ import java.util.Date;
 public class SelectingActivity extends AppCompatActivity {
 
     TextView txtNama;
-    Button btnPilihEvent,btnPilihGuest;
+    Button btnPilihEvent, btnPilihGuest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class SelectingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SelectingActivity.this, EventActivity.class);
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -43,7 +43,7 @@ public class SelectingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SelectingActivity.this, GuestActivity.class);
-                startActivityForResult(intent,2);
+                startActivityForResult(intent, 2);
             }
         });
     }
@@ -52,13 +52,12 @@ public class SelectingActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1){
-            if (resultCode == Activity.RESULT_OK){
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
                 btnPilihEvent.setText(data.getStringExtra("namaevent"));
             }
-        }
-        else if (requestCode == 2){
-            if (resultCode == Activity.RESULT_OK){
+        } else if (requestCode == 2) {
+            if (resultCode == Activity.RESULT_OK) {
                 btnPilihGuest.setText(data.getStringExtra("namaguest"));
 
                 String dateString = data.getStringExtra("birthdayguest");
@@ -69,24 +68,20 @@ public class SelectingActivity extends AppCompatActivity {
         }
     }
 
-    public void jenisOS(String dateString){
+    public void jenisOS(String dateString) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date date = sdf.parse(dateString);
-            int startDate = (int) (date.getTime()/1000);
+            int startDate = (int) (date.getTime() / 1000);
 
             String os;
-            if (startDate % 2 == 0  && startDate % 3 == 0 ){
+            if (startDate % 2 == 0 && startDate % 3 == 0) {
                 os = "iOS";
-            }
-            else if (startDate % 3 == 0){
+            } else if (startDate % 3 == 0) {
                 os = "android";
-            }
-            else if (startDate % 2 == 0){
+            } else if (startDate % 2 == 0) {
                 os = "blackberry";
-            }
-            else
-            {
+            } else {
                 os = "feature phone";
             }
 
@@ -96,18 +91,18 @@ public class SelectingActivity extends AppCompatActivity {
         }
     }
 
-    public void isMonthPrime(String dateString){
+    public void isMonthPrime(String dateString) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date date = sdf.parse(dateString);
-            int month = Integer.valueOf((String) DateFormat.format("MM",date));
+            int month = Integer.valueOf((String) DateFormat.format("MM", date));
 
             int counter = 0;
-            for (int i=2;i<=month;i++){
+            for (int i = 2; i <= month; i++) {
                 if (month % i == 0)
                     counter++;
             }
-            String prime = (counter == 1)? "Bulan "+ month +" merupakan bilangan prima" : "Bulan "+ month +" bukan bilangan prima";
+            String prime = (counter == 1) ? "Bulan " + month + " merupakan bilangan prima" : "Bulan " + month + " bukan bilangan prima";
             Toast.makeText(this, prime, Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
             e.printStackTrace();

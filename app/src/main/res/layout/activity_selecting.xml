@@ -4,64 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
-    android:orientation="vertical"
+    android:background="@drawable/bg_validation"
     android:gravity="center"
-    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:padding="32dp"
     tools:context="com.anb.screeningtestapp.SelectingActivity">
 
     <LinearLayout
         android:id="@+id/layoutNama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="5"
+        android:layout_marginBottom="32dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="32dp">
+        android:weightSum="5">
 
         <TextView
+            style="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Nama"
-            android:textColor="@android:color/white"
-            style="@style/Base.TextAppearance.AppCompat.Medium"/>
+            android:textColor="@android:color/white" />
 
         <TextView
+            style="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text=": "
-            android:textColor="@android:color/white"
-            style="@style/Base.TextAppearance.AppCompat.Medium"/>
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/txtNama"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2.8"
             android:text="Nama anda"
-            android:textColor="@android:color/white"
-            style="@style/Base.TextAppearance.AppCompat.Medium"/>
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/btnPilihEvent"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pilih event"
-        android:textAlignment="center"
-        android:background="@drawable/button_file"
         android:layout_marginBottom="16dp"
-        style="@style/Base.TextAppearance.AppCompat.Medium"/>
+        android:background="@drawable/button_file"
+        android:text="Pilih event"
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/btnPilihGuest"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pilih guest"
-        android:textAlignment="center"
         android:background="@drawable/button_file"
-        style="@style/Base.TextAppearance.AppCompat.Medium"/>
+        android:text="Pilih guest"
+        android:textAlignment="center" />
 
 </LinearLayout>

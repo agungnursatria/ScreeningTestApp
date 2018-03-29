@@ -2,42 +2,76 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:descendantFocusability="blocksDescendants"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageEvent"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="16dp"
-        android:scaleType="centerCrop"/>
-
-    <LinearLayout
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardEvent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingRight="16dp">
-
-        <TextView
-            android:id="@+id/txtNamaEvent"
-            style="@style/Base.TextAppearance.AppCompat.Medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Nama Event" />
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+            android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
-
-        <TextView
-            android:id="@+id/txtTglEvent"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tanggal event" />
+            android:weightSum="1"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/txttNamaEvent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Let Success Make The Noise"
+                    android:textSize="16dp"
+                    style="@style/Base.TextAppearance.AppCompat.Title"/>
+
+                <TextView
+                    android:id="@+id/txttTglEvent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/brown"
+                    android:text="Nov 9, 2016"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/listHashtag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/txtDescEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgEvent"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="0.3"
+                android:src="@drawable/study"
+                android:scaleType="centerCrop"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
 
 </LinearLayout>

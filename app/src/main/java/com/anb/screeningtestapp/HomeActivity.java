@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -19,19 +20,19 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         final EditText edtNama = findViewById(R.id.edtNama);
-        Button btnNext = findViewById(R.id.btnNext);
+        FrameLayout btnSelesai = findViewById(R.id.btnSelesai);
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
+        btnSelesai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String nama = edtNama.getText().toString();
-                if (nama != ""){
+                if (!nama.equals("")) {
                     boolean palindromCheck = isPalindrom(nama);
                     String palindromWord = palindromCheck ? "isPalindrom" : "not palindrome";
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
                     builder.setTitle(String.valueOf(palindromCheck).toUpperCase())
-                            .setMessage(palindromWord)
+                            .setMessage(nama + " " + palindromWord)
                             .setCancelable(false)
                             .setPositiveButton("Next", new DialogInterface.OnClickListener() {
                                 @Override
@@ -51,13 +52,13 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private boolean isPalindrom(String sentence){
+    private boolean isPalindrom(String sentence) {
         sentence = sentence.replaceAll("\\s", "");
         Log.d("Palindrom Check", sentence);
-        int top = sentence.length()-1;
+        int top = sentence.length() - 1;
         int bottom = 0;
 
-        while (top >= bottom && sentence.charAt(bottom)==sentence.charAt(top)){
+        while (top >= bottom && sentence.charAt(bottom) == sentence.charAt(top)) {
             Log.d("Palindrom Check", "Senternce[top]: " + sentence.charAt(top) + "\n"
                     + "Senternce[bottom]: " + sentence.charAt(bottom) + "\n"
                     + "top: " + top + "\n"
