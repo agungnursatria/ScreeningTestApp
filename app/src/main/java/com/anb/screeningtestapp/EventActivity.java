@@ -37,7 +37,8 @@ public class EventActivity extends AppCompatActivity {
         listView = findViewById(R.id.event_list);
         btnBack = findViewById(R.id.btnBack);
 
-        initData();
+        if (eventlist.size() < 4)
+            initData();
 
         EventAdapter eventAdapter = new EventAdapter(EventActivity.this, eventlist);
         listView.setAdapter(eventAdapter);
