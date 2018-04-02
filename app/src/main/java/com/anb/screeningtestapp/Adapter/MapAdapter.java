@@ -1,12 +1,13 @@
 package com.anb.screeningtestapp.Adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.anb.screeningtestapp.R;
@@ -18,44 +19,42 @@ import java.util.ArrayList;
  * Created by Agung Nursatria on 3/29/2018.
  */
 
-public class MapAdapter extends RecyclerView.Adapter<MapAdapter.MapViewHolder> {
+public class MapAdapter extends PagerAdapter {
 
-    public Context context;
     public ArrayList<Event> eventlist;
+    LayoutInflater mLayoutInflater;
 
     public MapAdapter(Context context, ArrayList<Event> eventlist) {
-        this.context = context;
         this.eventlist = eventlist;
+        mLayoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
-    public MapViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.maps_item, parent, false);
-        return new MapViewHolder(itemView);
-    }
-
-    @Override
-    public void onBindViewHolder(MapViewHolder holder, int position) {
-        holder.txtMapsName.setText(eventlist.get(position).nama);
-        holder.imgMap.setImageResource(eventlist.get(position).image);
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return eventlist.size();
     }
 
-
-    class MapViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imgMap;
-        public TextView txtMapsName;
-
-        public MapViewHolder(View itemView) {
-            super(itemView);
-            imgMap = itemView.findViewById(R.id.imgMaps);
-            txtMapsName = itemView.findViewById(R.id.txtMapsName);
-        }
+    @Override
+    public boolean isViewFromObject(View view, Object object) {
+        return view == ((View) object);
     }
 
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        View v = mLayoutInflater.inflate(R.layout.map_item, container, false);
+
+        ImageView imgMaps = v.findViewById(R.id.imgMaps);
+        TextView txtMapsName = v.findViewById(R.id.txtMapsName);
+
+        imgMaps.setImageResource(eventlist.get(position).image);
+        txtMapsName.setText(eventlist.get(position).nama);
+
+        container.addView(v);
+        return v;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
+    }
 }

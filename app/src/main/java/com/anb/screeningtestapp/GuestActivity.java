@@ -47,6 +47,7 @@ public class GuestActivity extends AppCompatActivity {
 
         // Mengambil data dari json dan dipasang ke gridlayout
         swipe.setRefreshing(true);
+        guestAdapter = new GuestAdapter(GuestActivity.this, guestlist);
         requestJSONwithRetrofit();
 
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

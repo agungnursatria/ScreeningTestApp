@@ -3,15 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerMaps"
-        android:orientation="horizontal"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mapsPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="220dp"/>
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/maps"
-        android:layout_below="@id/recyclerMaps"
+        android:layout_below="@id/mapsPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
