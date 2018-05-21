@@ -3,14 +3,18 @@ package com.anb.screeningtestapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Agung Nursatria on 3/28/2018.
  */
 
-public class Guest {
+public class Guest extends RealmObject {
 
     @SerializedName("id")
     @Expose
+    @PrimaryKey
     public int id;
 
     @SerializedName("name")

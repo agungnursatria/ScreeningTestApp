@@ -1,10 +1,11 @@
-package com.anb.screeningtestapp.model;
+package com.anb.screeningtestapp.Retrofit;
+
+import com.anb.screeningtestapp.model.Guest;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 
 /**
  * Created by Agung Nursatria on 3/28/2018.

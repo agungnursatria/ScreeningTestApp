@@ -53,6 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imgProfilePic"
         android:layout_marginBottom="32dp"
+        android:padding="8dp"
+        android:background="@drawable/text_field"
         android:backgroundTint="@android:color/white"
         android:hint="Sarah Vidrayani"
         android:singleLine="true"

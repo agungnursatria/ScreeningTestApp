@@ -15,11 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anb.screeningtestapp.Adapter.GuestAdapter;
+import com.anb.screeningtestapp.Retrofit.RetroServer;
 import com.anb.screeningtestapp.model.Guest;
-import com.anb.screeningtestapp.model.RequestInterface;
+import com.anb.screeningtestapp.Retrofit.RequestInterface;
+import com.anb.screeningtestapp.utils.NetworkState;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,8 +37,11 @@ public class GuestActivity extends AppCompatActivity {
     public static final String BASE_URL = "http://dry-sierra-6832.herokuapp.com";
     SwipeRefreshLayout swipe;
     ArrayList<Guest> guestlist = new ArrayList<>();
-    GuestAdapter guestAdapter;
+    NetworkState networkState = new NetworkState();
+    GuestAdapter guestAdapter = null;
+
     GridView gridView;
+    Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +50,16 @@ public class GuestActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_guest);
         setSupportActionBar(toolbar);
 
-        gridView = findViewById(R.id.guest_list);
-        swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        Realm.init(getApplicationContext());
+        realm = Realm.getDefaultInstance();
 
-        // Mengambil data dari json dan dipasang ke gridlayout
-        swipe.setRefreshing(true);
+        if (!realm.isEmpty()) {
+            removeAllDataRealm();
+        }
+
+        gridView = findViewById(R.id.guest_list);
+        swipe = findViewById(R.id.swipe_refresh_layout);
+
         guestAdapter = new GuestAdapter(GuestActivity.this, guestlist);
         requestJSONwithRetrofit();
 
@@ -56,7 +69,14 @@ public class GuestActivity extends AppCompatActivity {
                 swipe.setRefreshing(true);
                 guestAdapter.guestList.clear();
                 guestAdapter.notifyDataSetChanged();
-                requestJSONwithRetrofit();
+                if (networkState.isNetworkAvailable(getApplicationContext())) {
+                    if (!realm.isEmpty()) {
+                        removeAllDataRealm();
+                    }
+                    requestJSONwithRetrofit();
+                } else {
+                    loadDataFromRealm();
+                }
             }
         });
 
@@ -82,48 +102,62 @@ public class GuestActivity extends AppCompatActivity {
 
     }
 
-    private void requestJSONwithRetrofit() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    private void removeAllDataRealm() {
+        realm.beginTransaction();
+        realm.deleteAll();
+        realm.commitTransaction();
+    }
 
-        RequestInterface request = retrofit.create(RequestInterface.class);
+    private void requestJSONwithRetrofit() {
+
+        final int[] img = {R.drawable.foto1,
+                R.drawable.foto2,
+                R.drawable.foto3,
+                R.drawable.foto4,
+                R.drawable.foto5,};
+
+        RequestInterface request = RetroServer.getClient().create(RequestInterface.class);
         Call<ArrayList<Guest>> call = request.getJSON();
 
         call.enqueue(new Callback<ArrayList<Guest>>() {
             @Override
-            public void onResponse(Call<ArrayList<Guest>> call, Response<ArrayList<Guest>> response) {
+            public void onResponse(Call<ArrayList<Guest>> call, final Response<ArrayList<Guest>> response) {
                 for (int i = 0; i < response.body().size(); i++) {
-                    Guest guest = new Guest();
-                    guest.id = response.body().get(i).id;
-                    guest.name = response.body().get(i).name;
-                    guest.birthday = response.body().get(i).birthday;
-                    guestlist.add(guest);
-
+                    realm.beginTransaction();
+                    Guest guestRealm = realm.createObject(Guest.class, response.body().get(i).id);
+                    guestRealm.name = response.body().get(i).name;
+                    guestRealm.birthday = response.body().get(i).birthday;
+                    guestRealm.image = img[i % 5];
+                    realm.commitTransaction();
+                    guestlist.add(guestRealm);
                 }
-                initImage();
                 guestAdapter = new GuestAdapter(GuestActivity.this, guestlist);
                 gridView.setAdapter(guestAdapter);
+                swipe.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<ArrayList<Guest>> call, Throwable t) {
                 Log.e(TAG, "onFailure: Something went wrong: " + t.getMessage());
                 Toast.makeText(GuestActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                swipe.setRefreshing(false);
             }
         });
+    }
+
+    private void loadDataFromRealm() {
+        RealmResults<Guest> results = realm.where(Guest.class).findAll();
+        for (int i = 0; i < results.size(); i++) {
+            guestlist.add(results.get(i));
+        }
+        guestAdapter = new GuestAdapter(GuestActivity.this, guestlist);
+        gridView.setAdapter(guestAdapter);
         swipe.setRefreshing(false);
     }
 
-    private void initImage() {
-        int[] img = {R.drawable.foto1,
-                R.drawable.foto2,
-                R.drawable.foto3,
-                R.drawable.foto4,
-                R.drawable.foto5,};
-        for (Guest guest : guestlist) {
-            guest.image = img[guestlist.indexOf(guest) % 5];
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 }
